@@ -1,15 +1,32 @@
 const { ministryService } = require('../../services');
 const { notificationRepository } = require('../../dal/repositories'); 
 const { Response } = require('../../utils/'); 
-const { daysChecker } = require('../../utils'); 
+const { daysChecker, cuitValidator } = require('../../utils'); 
 
-const daysController = async (req, res) => {
-    const { cuit } = req.params; 
+const statusQuery = async (req, res) => {
+    const { cuit } = req.params;
+    
+    if (! cuitValidator(cuit)) {
+        return Response.error(
+            res,
+            err=true, 
+            message = 'no se ingreso un cuit valido',
+            status = 400
+        )
+    }
 
     try {
         let reports = ministryService.getById(cuit);
         reports = reports["data"]
 
+        if (reports.length === 0){
+            return Response.success(
+                res,
+                message = 'no se encontraron datos para el cuit ingresado',
+                status = 400
+            )
+        }
+ 
         const notification = {
             status: true,
             cuit: cuit,
@@ -44,8 +61,10 @@ const daysController = async (req, res) => {
     }
 }
 
-const notificationController = {
-    daysController
+
+
+const notificationsController = {
+    statusQuery,
 }
 
-module.exports = notificationController; 
+module.exports = notificationsController; 

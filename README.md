@@ -1,5 +1,10 @@
 # 2021-TPI-G6
-## Instalación:
+
+## Version 'Live': 
+
+*  [https://api-secretaria-g6.herokuapp.com](https://api-secretaria-g6.herokuapp.com)
+
+## Instalacion local:
 
 1) Clonar el repositorio: 
 ```bash
@@ -26,7 +31,6 @@
 
 ### Migrar los modelos
 5) correr el siguiente comando en la terminal para migrar los modelos: 
-
 ```bash
     npx sequelize db:migrate
 ```
@@ -36,7 +40,6 @@
 ```bash
     npm run start
 ```
-
 
 ## API:
 
@@ -61,7 +64,7 @@ La response esperada para ese endpoint es del siguiente tipo: (Ejemplo)
             {
                 "title": "Incumplimiento mes: Enero",
                 "description": "Al dia de hoy se encuentra excedido 17 dias.",
-                "date": "2021-01-27T00:00:00.000Z"
+                "date": "2021-01-27"
             }
             ]
         }
